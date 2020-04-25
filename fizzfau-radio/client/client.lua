@@ -1,11 +1,4 @@
 
---===============================================================================
---=== Stworzone przez Alcapone aka suprisex. Zakaz rozpowszechniania skryptu! ===
---===================== na potrzeby LS-Story.pl =================================
---===============================================================================
-
-
--- ESX
 
 ESX = nil
 local PlayerData                = {}
@@ -33,16 +26,39 @@ end
 
 function enableRadio(enable)
   
-  
+  if enable == true then
+    if Config.DPEmotes then
+      ExecuteCommand('e radio')
+    else
+      PhonePlayText()
+      newPhoneProp()
+    end
+      SetNuiFocus(true, true)
+      radioMenu = enable
+
+      SendNUIMessage({
+
+      type = "enableui",
+        enable = enable
+
+    })
+  elseif enable == false then
+    if Config.DPEmotes then
+      ExecuteCommand('e c')
+    else
+      PhonePlayOut()
+      deletePhone()
+    end
     SetNuiFocus(true, true)
-    radioMenu = enable
+      radioMenu = enable
 
-    SendNUIMessage({
+      SendNUIMessage({
 
-     type = "enableui",
-      enable = enable
+      type = "enableui",
+        enable = enable
 
-  })
+    })
+  end
 end
 
 --- sprawdza czy komenda /radio jest włączony
@@ -128,6 +144,13 @@ RegisterNUICallback('leaveRadio', function(data, cb)
 
    cb('ok')
 
+end)
+
+RegisterNetEvent('fizzfau-radio:leave')
+AddEventHandler('fizzfau-radio:leave', function()
+  exports.tokovoip_script:removePlayerFromRadio(getPlayerRadioChannel)
+  exports.tokovoip_script:setPlayerData(playerName, "radio:channel", "nil", true)
+  exports['mythic_notify']:SendAlert('inform', Config.messages['you_leave'] .. getPlayerRadioChannel .. '.00 MHz </b>')
 end)
 
 RegisterNUICallback('escape', function(data, cb)
