@@ -1,6 +1,6 @@
 # Description
 
- A normal<a href="https://github.com/alcapone-dev/ls-radio"> ls-radio </a> script just added item check for command use.
+ A normal<a href="https://github.com/alcapone-dev/ls-radio"> ls-radio </a> script just added item check for command use and radio-text animation with radio prop.
 
 # Installation
 
