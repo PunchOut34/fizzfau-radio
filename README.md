@@ -8,7 +8,7 @@
 
 - Add this to your server.cfg:
 
-  `start fizzfau_radio` or `ensure fizzfau_radio`
+  `start fizzfau-radio` or `ensure fizzfau-radio`
 
 # Credit
 
